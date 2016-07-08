@@ -1,0 +1,21 @@
+{
+    "apiGetCallbackTemplate": {
+        "application/json": {
+            "operation": "verify",
+            "secret": "${fb_secret_key}",
+            "access_token": "${access_token}",
+            "verify_token": "$input.params('hub.verify_token')",
+            "challenge":"$input.params('hub.challenge')"
+        }
+    },
+    "apiPostCallbackTemplate": {
+        "application/json": {
+            "operation": "reply",
+            "body": "$input.json('$')",
+            "secret": "${fb_secret_key}",
+            "access_token": "${access_token}",
+            "verify_token": "$input.params('hub.verify_token')",
+            "challenge":"$input.params('hub.challenge')"
+        }        
+    }
+}
