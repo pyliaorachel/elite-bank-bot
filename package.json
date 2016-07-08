@@ -10,6 +10,7 @@
     "url": "git://github.com/"
   },
   "dependencies": {
+    "aws-sdk": "^2.4.6",
     "request": "^2.72.0"
   }
 }
