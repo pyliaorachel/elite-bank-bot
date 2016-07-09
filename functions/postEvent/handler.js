@@ -4,6 +4,29 @@ var request = require('request')
 // var aws = require('aws-sdk')
 // aws.config.region = 'ap-northeast-1';
 
+// For proof of concept, the userData are hard-coded instead of retrieved from database.
+// User ids for messaging are stored at the time they register with the FB fanpage.
+var userData = {
+    "companyInvestors": {
+        "LVMH": [
+            "1120359171369250",
+            "2"
+        ],
+        "Scotch Whiskey": [
+            "1120359171369250",
+            "3"
+        ],
+        "RyanAir": [
+            "1120359171369250",
+            "4"
+        ],
+        "Volkswagen Group": [
+            "1120359171369250",
+            "5"
+        ]
+    }
+}
+
 function display(object) {
     return JSON.stringify(object, null, 2)
 }
@@ -68,23 +91,85 @@ module.exports.handler = function(event, context) {
    //                  context.succeed(data.Payload)
    //              }
 			// });
+
+            // var id = "1120359171369250"
+            // var text = "Hello"
+            // var access_token = "EAAYiiUwupN0BAFze3uVHm81075dwg4BDK2qvha65yhddrXCrRUDLmrQpiWQZB9eHAeqaMFMYT80JRgvK9mgYEKmQ8dppPmwvhk5I106kdUHmEa1Y1vyvlalDPX64f08EmqDcusZCYFxZBbecoZBxdbELkVFKthIcWdqZAuAGXVgZDZD"
+            // request({
+            //     url: 'https://graph.facebook.com/v2.6/me/messages',
+            //     qs: {
+            //         access_token: access_token
+            //     },
+            //     method: 'POST',
+            //     json: {
+            //         recipient: {
+            //             id: id
+            //         },
+            //         message: {
+            //             text: text
+            //         }
+            //     }
+            // }, (error, response, body) => {
+            //     console.log('GET response', response);
+            //     context.succeed(response);
+            //     if (error) {
+            //         context.fail('Error sending message: ', error);
+            //     } else if (response.body.error) {
+            //         context.fail('Error: ', response.body.error);
+            //     }
+            // })
+
+            // look for affected users
+            var affectedInvestorList = new Object();
+            var data = json;
+
+            var postiveComp = data.affectedIndustries.positive;
+            postiveComp.forEach(function(company){
+                var affectedInvestors = userData.companyInvestors[company];
+                affectedInvestors.forEach(function(investor){
+                    if (!(investor in affectedInvestorList)){
+                        affectedInvestorList[investor] = {positive:[], negative:[]};
+                        affectedInvestorList[investor].positive.push(company);
+                    } else {
+                        affectedInvestorList[investor].positive.push(company);
+                    }
+                });
+                
+            });
+            var negativeComp = data.affectedIndustries.negative;
+            negativeComp.forEach(function(company){
+                var affectedInvestors = userData.companyInvestors[company];
+                affectedInvestors.forEach(function(investor){
+                    if (!(investor in affectedInvestorList)){
+                        affectedInvestorList[investor] = {positive:[], negative:[]};
+                        affectedInvestorList[investor].negative.push(company);
+                    } else {
+                        affectedInvestorList[investor].negative.push(company);
+                    }
+                });
+            });
+
+            // combine json to send
+            var payload = {
+                affectedInvestors: affectedInvestorList,
+                report: json
+            }
+
             request({
                 url: 'https://bga829qa2d.execute-api.ap-northeast-1.amazonaws.com/dev/bot',
                 method: 'POST',
-                json: json
+                json: payload
             }, (error, response, body) => {
-                console.log('Response', response);
-                console.log('Error', error);
-                console.log('Body', body);
-                
                 if (error) {
+                    console.log(error);
                     context.fail('Error sending message: ', error);
                 } else {
-                    context.succeed(response);
+                    console.log(response);
+                    context.succeed(payload);
                 }
             })
 
-            //context.succeed(data)
+            //context.succeed(json)
             break
         default:
             context.fail(new Error('Unrecognized operation "' + operation + '"'))
