@@ -10,10 +10,8 @@ module.exports.handler = function(event, context) {
 
     console.log('Event: ', display(event))
     const operation = event.operation
-    const secret = event.secret
-    const token = event.access_token 
     
-    function sendTextMessage(sender, text) {
+    function sendTextMessage(sender, text, token) {
         const messageData = {text: text}
         console.log('Ready to send text message', text);
         request({
@@ -41,6 +39,8 @@ module.exports.handler = function(event, context) {
 
     switch (operation) {
         case 'verify':
+            const secret = event.secret
+            const token = event.access_token 
             const verifyToken = event["verify_token"]
             if (secret === verifyToken) {
                 context.succeed(parseInt(event["challenge"]))
@@ -49,19 +49,21 @@ module.exports.handler = function(event, context) {
             }
             break
         case 'reply':
+            const secret = event.secret
+            const token = event.access_token 
             const messagingEvents = event.body.entry[0].messaging
             messagingEvents.forEach((messagingEvent) => {
                 const sender = messagingEvent.sender.id
                 if (messagingEvent.message && messagingEvent.message.text) {
                     const text = messagingEvent.message.text
                     console.log('In case reply', text);
-                    sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200))
+                    sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200), token)
                 }
             })
             break
         case 'postEvent':
             console.log(event)
-            //context.succeed()
+            context.succeed()
             break
         default:
             context.fail(new Error('Unrecognized operation "' + operation + '"'))
