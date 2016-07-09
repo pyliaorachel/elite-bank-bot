@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Posting</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.serializeJSON/2.7.2/jquery.serializejson.js"></script> 
+</head>
+<body>
+    <form id="postForm">
+        Market Event:<br>
+        Title:<br>
+        <input type="text" name="title" value="UK leaving the EU"><br>
+        Effects:<br>
+        <input type="text" name="effects[]" value="Depreciation of Euro and GBP"><br>
+        <input type="text" name="effects[]" value="Appreciation of USD"><br>
+        <input type="text" name="effects[]" value="Depreciation of Crude Oil"><br>
+        <input type="text" name="effects[]" value="Much higher taxes for agricultural product"><br>
+        Affected Industries:<br>
+        Positive:<br>
+        <input type="text" name="affectedIndustries[positive][]" value="LVMH"><br>
+        <input type="text" name="affectedIndustries[positive][]" value="Scotch Whiskey"><br>
+        Negative:<br>
+        <input type="text" name="affectedIndustries[negative][]" value="RyanAir"><br>
+        <input type="text" name="affectedIndustries[negative][]" value="Volkswagen Group"><br>
+        <input type="submit" value="Post">
+    </form>
+    <script>
+        $(document).ready(function() { 
+            $( "#postForm" ).submit(function( event ) {
+                event.preventDefault();
+
+                var data = $( this ).serializeJSON();
+                var dataStr = JSON.stringify(data);
+                
+                var input = $('<input type="hidden" name="content"/>');
+                input.val(dataStr);
+                $('<form action="https://bga829qa2d.execute-api.ap-northeast-1.amazonaws.com/dev/postEvent " method="POST"/>')
+                    .append(input)
+                    .appendTo($(document.body)) //it has to be added somewhere into the <body>
+                    .submit();
+            });
+        }); 
+    </script>
+</body>
+</html>
