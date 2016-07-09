@@ -31,7 +31,7 @@ module.exports.handler = function(event, context) {
 				FunctionName: 'bot',
 				InvocationType: 'Event',
 				LogType: 'None',
-				Payload: json,
+				Payload: JSON.stringify(json)
 			};
 			lambda.invoke(params, function(error, data) {
 				if (error) {

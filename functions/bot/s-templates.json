@@ -17,5 +17,11 @@
             "verify_token": "$input.params('hub.verify_token')",
             "challenge":"$input.params('hub.challenge')"
         }        
+    },
+    "apiPostInvokeCallbackTemplate": {
+        "application/json": {
+            "operation": "postEvent",
+            "body": "$input.json('$')"
+        }        
     }
 }
