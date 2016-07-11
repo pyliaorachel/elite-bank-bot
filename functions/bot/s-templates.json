@@ -21,6 +21,7 @@
     "apiPostInvokeCallbackTemplate": {
         "application/json": {
             "operation": "postEvent",
+            "access_token": "${access_token}",
             "body": "$input.json('$')"
         }        
     }
