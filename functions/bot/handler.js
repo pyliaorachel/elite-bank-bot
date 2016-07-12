@@ -65,10 +65,9 @@ module.exports.handler = function(event, context) {
                       url: url,
                       title: "Open Web URL"
                     }, {
-                      type: "postback",
-                      title: "Call Postback",
-                      payload: "Payload for first bubble"
-                    }],
+                      type: "account_link",
+                      url: "https://bga829qa2d.execute-api.ap-northeast-1.amazonaws.com/dev/authentication"
+                    }]
                   }]
                 }
               }
@@ -121,24 +120,40 @@ module.exports.handler = function(event, context) {
                         context.succeed();
                     });
                 } else if (messagingEvent.postback) {
-                    var event = messagingEvent;
+                    // var event = messagingEvent;
 
-                    var senderID = event.sender.id;
-                    var recipientID = event.recipient.id;
-                    var timeOfPostback = event.timestamp;
+                    // var senderID = event.sender.id;
+                    // var recipientID = event.recipient.id;
+                    // var timeOfPostback = event.timestamp;
 
-                    var payload = event.postback.payload;
+                    // var payload = event.postback.payload;
 
-                    console.log("Received postback for user %d and page %d with payload '%s' at %d", senderID, recipientID, payload, timeOfPostback);
+                    // console.log("Received postback for user %d and page %d with payload '%s' at %d", senderID, recipientID, payload, timeOfPostback);
 
-                    // When a postback is called, we'll send a message back to the sender to 
-                    // let them know it was successful
-                    var p = new Promise((resolve, reject)=> {
-                        sendTextMessage(senderID, "Postback called");
-                    });
-                    p.then(function(){
-                        context.succeed();
-                    });
+                    // // When a postback is called, we'll send a message back to the sender to 
+                    // // let them know it was successful
+                    // var p = new Promise((resolve, reject)=> {
+                    //     request({
+                    //         url: 'https://bga829qa2d.execute-api.ap-northeast-1.amazonaws.com/dev/transaction',
+                    //         method: 'GET'
+                    //     }, (error, response, body) => {
+                    //         if (error) {
+                    //             console.log(error);
+                    //             // context.fail('Error sending message: ', error);
+                    //             reject();
+                    //         } else {
+                    //             console.log(response);
+                    //             resolve();
+                    //         }
+                    //     })
+                    // });
+                    // p.then(function(){
+                    //     context.succeed();
+                    // });
+                } else if (messagingEvent.account_linking){
+                    console.log(messagingEvent);
+                    
+                    context.succeed();
                 }
             })
             break
