@@ -371,6 +371,18 @@ module.exports.handler = function(event, context) {
                     console.log("Received postback for user %d and page %d with payload '%s' at %d", senderID, recipientID, payload, timeOfPostback);
 
                     switch (payload) {
+                        case 'PAYLOAD_GET_STARTED':
+                            db.setUser(senderID);
+                            const text = 'Welcome to Elite Butler! You may ask any questions here. We will post to you the latest market news from time to time :D'
+                            
+                            var p = new Promise((resolve, reject) => {
+                                sendMsgAPIs.sendTextMessage(senderID, text, resolve);
+                            });
+                            p.then(() => {
+                                console.log('Promise complete in PAYLOAD_GET_STARTED');
+                                context.succeed();
+                            });
+                            break;
                         default:
                             const key = payload.substring(9, 17);
                             if (key === 'QUESTION') {

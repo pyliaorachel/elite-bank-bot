@@ -109,11 +109,24 @@ const getInvestorList = (res, rej) => {
     console.log('callback of getInvestorList');
     const data = snapshot.val();
     console.log(`InvestorList: ${JSON.stringify(data)}`);
-    res(data);
+
+    // parse object into array
+    const investorList = [];
+    Object.keys(data).forEach((id) => {
+      investorList.push(data[id]);
+    });
+
+    res(investorList);
   }, (error) => {
     console.log(`Error in getInvestorList: ${error}`);
     rej();
   });
+};
+
+const setUser = (userID) => {
+  console.log(`In setUser to set ${userID}`);
+
+  refInvestorList.push(userID);
 };
 
 module.exports = {
@@ -125,4 +138,5 @@ module.exports = {
   getTemplate,
   getKeys,
   getInvestorList,
+  setUser,
 };
