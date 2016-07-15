@@ -92,7 +92,8 @@
   "environment": {
     "SERVERLESS_PROJECT": "${project}",
     "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
+    "SERVERLESS_REGION": "${region}",
+    "FB_PAGE_ACCESS_TOKEN": "${access_token}"
   },
   "vpc": {
     "securityGroupIds": [],
