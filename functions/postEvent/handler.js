@@ -1,8 +1,8 @@
 'use strict';
 
-var request = require('request')
-var aws = require('aws-sdk')
-var db = require('../db.js');
+const request = require('request')
+const aws = require('aws-sdk')
+const db = require('../db.js');
 aws.config.region = 'ap-northeast-1';
 
 // define hard-coded data
