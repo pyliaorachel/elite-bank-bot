@@ -108,13 +108,14 @@ const getInvestorList = (res, rej) => {
   refInvestorList.once('value', (snapshot) => {
     console.log('callback of getInvestorList');
     const data = snapshot.val();
-    console.log(`InvestorList: ${JSON.stringify(data)}`);
 
     // parse object into array
     const investorList = [];
     Object.keys(data).forEach((id) => {
       investorList.push(data[id]);
     });
+
+    console.log(`InvestorListArray: ${investorList}`);
 
     res(investorList);
   }, (error) => {
