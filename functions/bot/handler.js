@@ -2,11 +2,10 @@
 
 var request = require('request');
 var sendMsgAPIs = require('./sendMsgAPIs.js');
-var db = require('./db.js');
+var db = require('../db.js');
 
 // define hard-coded data
 var phoneNumber = "0000-0000" // phone number of Elite Butler
-var investorList = ["1", "2", "3", "4", "5", "6", "7", "1120359171369250"]; // messenger ids of registered clients
 
 function display(object) {
     return JSON.stringify(object, null, 2)

@@ -11,6 +11,7 @@ const refQuestions = db.ref('/questions');
 const refAnswers = db.ref('/answers');
 const refTemplates = db.ref('/templates');
 const refKeys = db.ref('/keys');
+const refInvestorList = db.ref('/investorList');
 
 const getData = (res, rej) => {
   console.log('In getData');
@@ -102,6 +103,19 @@ const getKeys = (res, rej) => {
   });
 };
 
+const getInvestorList = (res, rej) => {
+  console.log('In getInvestorList');
+  refInvestorList.once('value', (snapshot) => {
+    console.log('callback of getInvestorList');
+    const data = snapshot.val();
+    console.log(`InvestorList: ${JSON.stringify(data)}`);
+    res(data);
+  }, (error) => {
+    console.log(`Error in getInvestorList: ${error}`);
+    rej();
+  });
+};
+
 module.exports = {
   getData,
   getQuestions,
@@ -110,4 +124,5 @@ module.exports = {
   getTemplates,
   getTemplate,
   getKeys,
+  getInvestorList,
 };
