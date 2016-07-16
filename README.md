@@ -3,7 +3,10 @@
 A proof of concept for the Elite Bank BOT - Elite Butler
 
 ## Language & Environment
-Project written in Node.js & deployed in [AWS Lambda](https://aws.amazon.com/lambda/) using [serverless](https://github.com/serverless/serverless) framework.
+
+Product based on Facebook Messenger Platform and webhook to our BOT server.
+
+Serverside implementation written in Node.js & deployed in [AWS Lambda](https://aws.amazon.com/lambda/) using [serverless](https://github.com/serverless/serverless) framework.
 
 Database using Google [Firebase](https://www.firebase.com).
 
@@ -152,6 +155,9 @@ The templates is the format of message for each answers, because some may have l
 ### Other Details
 #### Detail data flow of market event report
 
+<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13706139_1216749095036521_1488263832_n.jpg?oh=89253b13c198bda789ff659cd6cf5bcf&oe=578C2C3C" 
+alt="Feature View" width="180" height="320" border="10" />
+
 1. In the analyst webpage, the analyst will insert the data into the webpage and submit it.
 2. The postEvent function will be trigered and parse the data into JSON format, which looks like this:
   
@@ -219,6 +225,13 @@ The templates is the format of message for each answers, because some may have l
 6. Requests are sent to BOT for sending messages to the users.
 
 #### Details of Q&A system
+
+<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13705077_1216749131703184_912853568_n.jpg?oh=f6efedb253119cb7d20c4ecab5bf0ea3&oe=578C9D8E" 
+alt="No corresponding answer" width="180" height="320" border="50" />
+<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13705260_1216749248369839_408171493_n.jpg?oh=cb6ff7a8a2504e0db4e52b5ddc0596b3&oe=578CC0C4" 
+alt="Suggesting questions based on keywords" width="180" height="320" border="50" />
+<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13689572_1216749261703171_1730182806_n.jpg?oh=6c9313b7b062480b0bd9e3e7ef9bd1a5&oe=578CAF38" 
+alt="Answer in text form or links" width="180" height="320" border="50" />
 
 **For code details, please review functions/bot/utils.processQAndA*
 
