@@ -7,7 +7,7 @@ Project written in Node.js & deployed in [AWS Lambda](https://aws.amazon.com/lam
 
 Database using Google [Firebase](https://www.firebase.com).
 
-**Depending on the budjet, performance requirement, data size, and project size, it is recommended to adopt a suitable environment for your project.*
+**Depending on the budget, performance requirement, data size, and project size, it is recommended to adopt a suitable environment for your project.*
 
 ## Function description
 ### functions/bot
