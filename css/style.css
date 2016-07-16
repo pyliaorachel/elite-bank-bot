@@ -1,0 +1,28 @@
+.container {
+    font-family: 'Prompt', sans-serif;
+    padding: 30px;
+}
+h2 {
+    text-align: center;
+}
+form {
+    max-width: 100%;
+    width: 600px;
+    margin: 0 auto;
+}
+h4, h5 {
+    margin: 20px 0 10px 0;
+    padding: 0;
+}
+input {
+    max-width: 100%;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+button {
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+    background-color: gray;
+    border-style: none;
+}

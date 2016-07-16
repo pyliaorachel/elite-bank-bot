@@ -2,34 +2,33 @@
 <html>
 <head>
     <title>Login to Elite Bank</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 </head>
 <body>
-    <p>Welcome to Elite Bank. For proof of concept, please submit the form directly.</p>
-    <form id="loginForm">
-        Username: <br>
-        <input id="username" type="text" name="username" value="elitebutler"><br>
-        Password: <br>
-        <input id="password" type="password" name="password" value="12345"><br>
-        <input type="submit" value="Login">
-    </form>
-    <p id="msg"></p>
+    <div class="container">
+        <h2>Login to Elite Bank</h2>
+        <form id="loginForm">
+            <p>Welcome to Elite Bank!<br>For proof of concept, please submit the form directly.</p>
+            <h4>Username</h4>
+            <input id="username" type="text" name="username" value="elitebutler"><br>
+            <h4>Password</h4>
+            <input id="password" type="password" name="password" value="12345"><br>
+            <input type="submit" value="Login">
+        </form>
+        <p id="msg"></p>
+    </div>
     <script>
         $(document).ready(function() { 
-            $( "#loginForm" ).submit(function( event ) {
+            $("#loginForm").submit(function( event ) {
                 event.preventDefault();
 
                 if ($('#username').val() === "elitebutler") {
                     if ($('#password').val() === "12345") {
                         // authentication successful
-
-                        // fb but, not valid by now
-                        // var uri = redirectUri +"&authorization_code="+ authorizationCode;
-
                         var uri = "https://bga829qa2d.execute-api.ap-northeast-1.amazonaws.com/dev/transaction";
-
                         window.location = uri;
-                        
                     } else {
                         $('#msg').html("Wrong password!");
                     }

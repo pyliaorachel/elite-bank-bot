@@ -6,24 +6,20 @@ const utils = require('./utils.js');
 const db = require('../db.js');
 
 // define hard-coded data
-var phoneNumber = "0000-0000" // phone number of Elite Butler
-
-function display(object) {
-    return JSON.stringify(object, null, 2)
-}
+const phoneNumber = '0000-0000' // phone number of Elite Butler
 
 module.exports.handler = function(event, context) {
 
-    console.log('Event: ', display(event))
-    const operation = event.operation
-    const secret = event.secret
-    const token = event.access_token 
+    console.log(`Event: ${JSON.stringify(event)}`);
+    const operation = event.operation;
+    const secret = event.secret;
+    const token = event.access_token;
 
     switch (operation) {
         case 'verify':
-            const verifyToken = event["verify_token"];
+            const verifyToken = event['verify_token'];
             if (secret === verifyToken) {
-                context.succeed(parseInt(event["challenge"]));
+                context.succeed(parseInt(event['challenge']));
             } else {
                 context.fail(new Error('Unmatch'));
             }
@@ -33,14 +29,14 @@ module.exports.handler = function(event, context) {
             messagingEvents.forEach((messagingEvent) => {
                 const sender = messagingEvent.sender.id;
                 if (messagingEvent.message && messagingEvent.message.text) {
-                    var pQandA = new Promise((res, rej) => {
+                    const pQandA = new Promise((res, rej) => {
                         console.log('Ready to process Q&A');
                         utils.processQAndA(messagingEvent.message.text, res);
                     });
                     pQandA.then((items) => {
-                        console.log('Items: ', items);
+                        console.log(`Items: '${items}`);
 
-                        var p = new Promise((resolve, reject)=> {
+                        const p = new Promise((resolve, reject)=> {
                             if (items.length === 0) {
                                 console.log('No suggested questions.');
                                 const text = 'Sorry, we cannot find a corresponding answer to your question. Try to make the keywords clearer, or contact (00)-0000-0000 for help.';
@@ -55,27 +51,26 @@ module.exports.handler = function(event, context) {
                             context.succeed();
                         });
                     });
-                    
                 } else if (messagingEvent.postback) {
-                    var event = messagingEvent;
+                    const event = messagingEvent;
 
-                    var senderID = event.sender.id;
-                    var recipientID = event.recipient.id;
-                    var timeOfPostback = event.timestamp;
+                    const senderID = event.sender.id;
+                    const recipientID = event.recipient.id;
+                    const timeOfPostback = event.timestamp;
 
-                    var payload = event.postback.payload;
+                    const payload = event.postback.payload;
 
-                    console.log("Received postback for user %d and page %d with payload '%s' at %d", senderID, recipientID, payload, timeOfPostback);
+                    console.log('Received postback for user %d and page %d with payload '%s' at %d', senderID, recipientID, payload, timeOfPostback);
 
                     switch (payload) {
                         case 'PAYLOAD_GET_STARTED':
                             db.setUser(senderID);
                             const text = 'Welcome to Elite Butler! You may ask any questions here. We will post to you the latest market news from time to time :D'
                             
-                            var p = new Promise((resolve, reject) => {
+                            const pStart = new Promise((resolve, reject) => {
                                 sendMsgAPIs.sendTextMessage(senderID, text, resolve);
                             });
-                            p.then(() => {
+                            pStart.then(() => {
                                 console.log('Promise complete in PAYLOAD_GET_STARTED');
                                 context.succeed();
                             });
@@ -85,41 +80,39 @@ module.exports.handler = function(event, context) {
                             if (key === 'QUESTION') {
                                 const id = payload.substring(18);
                                 console.log(`Postback called for question ${id}`);
-                                var p = new Promise((resolve, reject) => {
+                                const pAns = new Promise((resolve, reject) => {
                                     sendMsgAPIs.sendAnswer(senderID, id, resolve);
                                 });
-                                p.then(() => {
+                                pAns.then(() => {
                                     console.log('Promise complete in postback');
                                     context.succeed();
                                 });
                             }
                     }
                 } else if (messagingEvent.account_linking){
-                    console.log(messagingEvent);
-                    
+                    console.log(`Account linking: ${messagingEvent}`);
                     context.succeed();
                 }
             })
             break;
         case 'postEvent':
+            const investor = event.body.id;
+            const reportUrl = event.body.reportUrl;
+            const title = event.body.title;
 
-            var investor = event.body.id;
-            var reportUrl = event.body.reportUrl;
-            var title = event.body.title;
-
-            var message = "Dear Client,\n\nAttached please find the link for the latest market event report.\n\nIf you still find concerns, please contact "+phoneNumber;
-            var p1 = new Promise((resolve, reject)=>{
+            const message = `Dear Client,\n\nAttached please find the link for the latest market event report.\n\nIf you still find concerns, please contact ${phoneNumber}`;
+            const pPost1 = new Promise((resolve, reject)=>{
                 sendMsgAPIs.sendUrlMessage(investor, reportUrl, title, resolve)
             });
-            var p2 = new Promise((resolve, reject)=>{
+            const pPost2 = new Promise((resolve, reject)=>{
                 sendMsgAPIs.sendTextMessage(investor, message, resolve);
             });
-            Promise.all([p1, p2]).then(()=>{
+            Promise.all([pPost1, pPost2]).then(()=>{
                 context.succeed();
             });
             break;
         default:
-            context.fail(new Error('Unrecognized operation "' + operation + '"'))
+            context.fail(new Error(`Unrecognized operation ${operation}`));
     }
 
 }

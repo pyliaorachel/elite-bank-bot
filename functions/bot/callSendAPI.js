@@ -15,8 +15,7 @@ module.exports = (messageData, resolve) => {
     if (!error && response.statusCode === 200) {
       const recipientId = body.recipient_id;
       const messageId = body.message_id;
-      console.log(`Successfully sent generic message with id ${messageId} 
-      to recipient ${recipientId}`);
+      console.log(`Successfully sent generic message with id ${messageId} to recipient ${recipientId}`);
       resolve();
     } else {
       console.error('Unable to send message.');
