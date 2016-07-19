@@ -1,5 +1,7 @@
 {
   "name": "elite-butler",
   "custom": {},
-  "plugins": ["serverless-offline"]
+  "plugins": [
+    "serverless-offline"
+  ]
 }

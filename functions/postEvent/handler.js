@@ -78,7 +78,7 @@ module.exports.handler = function(event, context) {
             // send individual messages one by one
             const marketEvent = json;
 
-            const beginning = `A recent market event ${marketEvent.title} is affecting the market to a great deal. Summarized effects:\n\n`;
+            let beginning = `A recent market event ${marketEvent.title} is affecting the market to a great deal. Summarized effects:\n\n`;
             marketEvent.effects.forEach(function(effect){
                 beginning += effect+'\n';
             });

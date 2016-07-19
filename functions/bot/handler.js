@@ -34,7 +34,7 @@ module.exports.handler = function(event, context) {
                         utils.processQAndA(messagingEvent.message.text, res);
                     });
                     pQandA.then((items) => {
-                        console.log(`Items: '${items}`);
+                        console.log(`Items: ${items}`);
 
                         const p = new Promise((resolve, reject)=> {
                             if (items.length === 0) {
@@ -60,7 +60,7 @@ module.exports.handler = function(event, context) {
 
                     const payload = event.postback.payload;
 
-                    console.log('Received postback for user %d and page %d with payload '%s' at %d', senderID, recipientID, payload, timeOfPostback);
+                    console.log('Received postback for user %d and page %d with payload %s at %d', senderID, recipientID, payload, timeOfPostback);
 
                     switch (payload) {
                         case 'PAYLOAD_GET_STARTED':
@@ -102,7 +102,7 @@ module.exports.handler = function(event, context) {
 
             const message = `Dear Client,\n\nAttached please find the link for the latest market event report.\n\nIf you still find concerns, please contact ${phoneNumber}`;
             const pPost1 = new Promise((resolve, reject)=>{
-                sendMsgAPIs.sendUrlMessage(investor, reportUrl, title, resolve)
+                sendMsgAPIs.sendUrlMessage(investor, reportUrl, title, resolve);
             });
             const pPost2 = new Promise((resolve, reject)=>{
                 sendMsgAPIs.sendTextMessage(investor, message, resolve);

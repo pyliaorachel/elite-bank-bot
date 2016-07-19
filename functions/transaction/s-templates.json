@@ -1,8 +1,8 @@
 {
-    "apiGetCallbackTemplate": {
-        "application/json": {
-            "operation": "transaction",
-            "body": "$input.params('status')"
-        }
+  "apiGetCallbackTemplate": {
+    "application/json": {
+      "operation": "transaction",
+      "body": "$input.params('status')"
     }
+  }
 }

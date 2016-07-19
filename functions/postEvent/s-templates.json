@@ -1,8 +1,8 @@
 {
-    "postEventTemplate": {
-        "application/x-www-form-urlencoded": {
-            "operation": "postEvent",
-            "payload": "$input.body"
-        }
+  "postEventTemplate": {
+    "application/x-www-form-urlencoded": {
+      "operation": "postEvent",
+      "payload": "$input.body"
     }
+  }
 }

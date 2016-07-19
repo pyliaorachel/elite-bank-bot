@@ -16,7 +16,8 @@ function sendTextMessage(recipientId, messageText, resolve) {
 }
 
 function sendUrlMessage(id, url, title, resolve) {
-  var messageData = {
+  console.log('In sendUrlMessage');
+  const messageData = {
       recipient: {
         id: id
       },
@@ -33,10 +34,11 @@ function sendUrlMessage(id, url, title, resolve) {
               buttons: [{
                 type: "web_url",
                 url: url,
-                title: "Open Report Link"
+                title: "Open Report Link",
               }, {
-                type: "account_link",
-                url: "https://bga829qa2d.execute-api.ap-northeast-1.amazonaws.com/dev/authentication"
+                type: "web_url",
+                url: "https://bga829qa2d.execute-api.ap-northeast-1.amazonaws.com/dev/authentication",
+                title: "Make Transaction",
               }]
             }]
           }
@@ -67,8 +69,8 @@ function sendGenericMessage(recipientId, items, resolve) {
 }
 
 function sendAnswer(recipientId, answerID, resolve) {
-
-  var pa = new Promise ((res, rej) => {
+  console.log('In sendAnswer');
+  const pa = new Promise ((res, rej) => {
       db.getAnswer(answerID, res, rej);
   });
   pa.then((answer) => {

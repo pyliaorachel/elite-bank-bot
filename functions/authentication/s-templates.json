@@ -1,9 +1,9 @@
 {
-    "apiGetCallbackTemplate": {
-        "application/json": {
-            "operation": "authenticate",
-            "account_linking_token": "$input.params('account_linking_token')",
-            "redirect_uri": "$input.params('redirect_uri')"
-        }
+  "apiGetCallbackTemplate": {
+    "application/json": {
+      "operation": "authenticate",
+      "account_linking_token": "$input.params('account_linking_token')",
+      "redirect_uri": "$input.params('redirect_uri')"
     }
+  }
 }
