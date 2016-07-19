@@ -4,9 +4,9 @@ A proof of concept for the Elite Bank BOT - Elite Butler
 
 ## Language & Environment
 
-Product based on Facebook Messenger Platform and webhook to our BOT server.
+Product based on __Facebook Messenger Platform__ and webhook to our BOT server.
 
-Serverside implementation written in Node.js & deployed in [AWS Lambda](https://aws.amazon.com/lambda/) using [serverless](https://github.com/serverless/serverless) framework.
+Serverside implementation written in __Node.js__ & deployed in [AWS Lambda](https://aws.amazon.com/lambda/) using [serverless](https://github.com/serverless/serverless) framework.
 
 Database using Google [Firebase](https://www.firebase.com).
 
@@ -23,15 +23,22 @@ Linked from a report forming page to be used by the market event analyst. When t
 After the market event report is presented to user, a button can be pressed if the user wishes to perform action. It will link to this authentication page. 
 
 **The page is the index.html file at functions/authentication*
+
+<img src="https://scontent-hkg3-1.xx.fbcdn.net/t31.0-8/13691001_1217575908287173_4051419229606407373_o.jpg" 
+alt="Authentication Page" width="330" height="200" border="50" />
+
 ### functions/transaction
 If authentication passes, the user will be redirected to the transaction page to perform transaction. Here we simplify a bank transaction system by only presenting a single button as for proof of concept. The real system should be more complicated.
 
 **The page is the index.html file at functions/transaction*
 
+<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13709953_1217575941620503_7497970868726730283_n.jpg?oh=afacefced5cfd2d25e47290ff496fb3b&oe=582F69F7" 
+alt="Transaction Page" width="450" height="200" border="50" />
+
 ## Database description
 The database is based on Firebase in our proof of concept. The choice of database should be suitable for your own dataset and implementation.
 
-The data will be retrieved as JSON format:
+The data will be retrieved in JSON format:
 ```
 {
   "answers": {
@@ -148,7 +155,7 @@ The data will be retrieved as JSON format:
 
 We stored the user IDs (investorList) and the Q&A data. Here we only have six questions. A simplified MapReduce technique is simulated for searching.
 
-The templates is the format of message for each answers, because some may have links to it, and we want to customize each answers.
+The templates is the format of message for each answer, because some may have links to it, and we want to customize each answer.
 
 **The userData storing the investor list for each company is missing in the database here. It is hardcoded in the functions/postEvent/handler.js file for simplification.*
 
@@ -159,6 +166,9 @@ The templates is the format of message for each answers, because some may have l
 alt="Feature View" width="180" height="320" border="10" />
 
 1. In the analyst webpage, the analyst will insert the data into the webpage and submit it.
+
+  <img src="https://scontent-hkg3-1.xx.fbcdn.net/t31.0-8/13723914_1217575978287166_7222692591402528362_o.jpg" alt="Market Event" width="320" height="320" border="10" />
+
 2. The postEvent function will be trigered and parse the data into JSON format, which looks like this:
   
   ```
@@ -223,6 +233,9 @@ alt="Feature View" width="180" height="320" border="10" />
   **The keys are Firebase-inserted IDs, and the values are the user IDs. Can also modify to store the data as {userID: userName}*
 5. The function starts to parse customized report for individual investors in the investorList.
 6. Requests are sent to BOT for sending messages to the users.
+
+<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13700231_1217603448284419_7390474923258047615_n.jpg?oh=0e5489d06067a52195c76d8396cda5b6&oe=57F410EF" 
+alt="Sample Report" width="180" height="320" border="50" />
 
 #### Details of Q&A system
 
