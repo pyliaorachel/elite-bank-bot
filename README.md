@@ -1,4 +1,4 @@
-![Elite Butler](https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13754572_1217239028320861_8226631216549967950_n.jpg?oh=b6e018d62f29c231d0747e74f82d34cd&oe=57EC34FD)
+![Elite Butler](https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/cover.jpg)
 
 A proof of concept for the Elite Bank BOT - Elite Butler
 
@@ -24,7 +24,7 @@ After the market event report is presented to user, a button can be pressed if t
 
 **The page is the index.html file at functions/authentication*
 
-<img src="https://scontent-hkg3-1.xx.fbcdn.net/t31.0-8/13691001_1217575908287173_4051419229606407373_o.jpg" 
+<img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/login.jpg" 
 alt="Authentication Page" width="330" height="200" border="50" />
 
 ### functions/transaction
@@ -32,7 +32,7 @@ If authentication passes, the user will be redirected to the transaction page to
 
 **The page is the index.html file at functions/transaction*
 
-<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13709953_1217575941620503_7497970868726730283_n.jpg?oh=afacefced5cfd2d25e47290ff496fb3b&oe=582F69F7" 
+<img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/transaction.jpg" 
 alt="Transaction Page" width="450" height="200" border="50" />
 
 ## Database description
@@ -162,12 +162,12 @@ The templates is the format of message for each answer, because some may have li
 ### Other Details
 #### Detail data flow of market event report
 
-<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13706139_1216749095036521_1488263832_n.jpg?oh=89253b13c198bda789ff659cd6cf5bcf&oe=578C2C3C" 
+<img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/report.jpg" 
 alt="Feature View" width="180" height="320" border="10" />
 
 1. In the analyst webpage, the analyst will insert the data into the webpage and submit it.
 
-  <img src="https://scontent-hkg3-1.xx.fbcdn.net/t31.0-8/13723914_1217575978287166_7222692591402528362_o.jpg" alt="Market Event" width="320" height="320" border="10" />
+  <img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/make_report.jpg" alt="Market Event" width="320" height="320" border="10" />
 
 2. The postEvent function will be trigered and parse the data into JSON format, which looks like this:
   
@@ -234,16 +234,16 @@ alt="Feature View" width="180" height="320" border="10" />
 5. The function starts to parse customized report for individual investors in the investorList.
 6. Requests are sent to BOT for sending messages to the users.
 
-<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13700231_1217603448284419_7390474923258047615_n.jpg?oh=0e5489d06067a52195c76d8396cda5b6&oe=57F410EF" 
+<img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/report-fb.jpg" 
 alt="Sample Report" width="180" height="320" border="50" />
 
 #### Details of Q&A system
 
-<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13705077_1216749131703184_912853568_n.jpg?oh=f6efedb253119cb7d20c4ecab5bf0ea3&oe=578C9D8E" 
+<img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/questions.jpg" 
 alt="No corresponding answer" width="180" height="320" border="50" />
-<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13705260_1216749248369839_408171493_n.jpg?oh=cb6ff7a8a2504e0db4e52b5ddc0596b3&oe=578CC0C4" 
+<img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/question_confirm.jpg" 
 alt="Suggesting questions based on keywords" width="180" height="320" border="50" />
-<img src="https://scontent-hkg3-1.xx.fbcdn.net/v/t34.0-12/13689572_1216749261703171_1730182806_n.jpg?oh=6c9313b7b062480b0bd9e3e7ef9bd1a5&oe=578CAF38" 
+<img src="https://github.com/pyliaorachel/elite-bank-bot/blob/master/img/answer.jpg" 
 alt="Answer in text form or links" width="180" height="320" border="50" />
 
 **For code details, please review functions/bot/utils.processQAndA*
